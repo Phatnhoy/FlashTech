@@ -26,32 +26,32 @@ const ProductCarouselComponent = () => {
         <img
           className="d-block w-100"
           style={{ height: "300px", objectFit: "cover" }}
-          src="/images/carousel/carousel-2.png"
+          src="/images/carousel/tablet.png"
           alt="Second slide"
         />
 
         <Carousel.Caption>
           <LinkContainer style={cursorP} to="/productdetails">
-            <h3>Bestseller in Books Category</h3>
+            <h3>Bestseller in Tablets Category</h3>
           </LinkContainer>
-          <p>World of Eric Carle, Hear Bear Roar 30-Button Animal Sound Book</p>
+          <p>10.4-inch Tablet with 2K Display, Octa-Core Processor, 8GB RAM, 128GB Storage, and Stylus Support</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
           style={{ height: "300px", objectFit: "cover" }}
-          src="/images/carousel/carousel-3.png"
+          src="/images/carousel/smartphone.png"
           alt="Third slide"
         />
 
         <Carousel.Caption>
           <LinkContainer style={cursorP} to="/productdetails">
-            <h3>Bestseller in Cameras Category</h3>
+            <h3>Bestseller in Smartphones Category</h3>
           </LinkContainer>
           <p>
-            4K Camcorder Video Camera 60FPS 48MP Vlogging Camera for YouTube
-            WiFi 16X Digital Camera
+          Ultra Smartphone 5G with 120Hz AMOLED Display, 108MP Camera, 12GB RAM, and
+          256GB Storage
           </p>
         </Carousel.Caption>
       </Carousel.Item>

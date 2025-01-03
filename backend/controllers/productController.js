@@ -118,6 +118,66 @@ const getProductById = async (req, res, next) => {
   }
 };
 
+const getRelatedProducts = async (req, res, next) => {
+  try {
+    const limit = 4;
+    const productId = req.params.id;
+    const product = await Product.findById(productId).orFail();
+    // const relatedProducts = await Product.find({
+    //   _id: { $ne: productId },
+    //   category: product.category,
+    //   attrs: {
+    //     $elemMatch: {
+    //       key: { $in: product.attrs.map(attr => attr.key) },
+    //       value: { $in: product.attrs.map(attr => attr.value) },
+    //     },
+    //   },
+    // }).limit(4);
+    // const relatedProducts = await Product.find({
+    //   _id: { $ne: productId },
+    //   category: product.category,
+    //   rating: { $gte: product.rating - 1, $lte: product.rating + 1 }, // Rating within 1 point range
+    // }).limit(4);
+    var relatedProducts = await Product.find({
+      _id: { $ne: productId }, 
+      category: product.category, 
+    })
+      .sort({ sales: -1 }) 
+      .limit(limit); 
+    if (relatedProducts.length < limit) {
+        const additionalProducts = await Product.find({
+          _id: { $nin: [productId, ...relatedProducts.map(p => p._id)] },
+        }).limit(limit - relatedProducts.length);
+    
+    relatedProducts = [...relatedProducts, ...additionalProducts];
+    }
+    res.json(relatedProducts);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getHotProducts = async (req, res, next) => {
+  try {
+    const product = await Product.aggregate([
+      {$sort: {sales: -1}}
+    ])
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+};
+const getNewProducts = async (req, res, next) => {
+  try {
+    const product = await Product.aggregate([
+      {$sort: {updatedAt: -1}}
+    ])
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getBestsellers = async (req, res, next) => {
   try {
     const products = await Product.aggregate([
@@ -301,6 +361,9 @@ const adminDeleteProductImage = async (req, res, next) => {
 module.exports = {
   getProducts,
   getProductById,
+  getHotProducts,
+  getNewProducts,
+  getRelatedProducts,
   getBestsellers,
   adminGetProducts,
   adminDeleteProduct,

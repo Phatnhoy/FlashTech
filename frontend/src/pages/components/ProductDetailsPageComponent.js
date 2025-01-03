@@ -10,13 +10,14 @@ import {
 } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import AddedToCartMessageComponent from "../../components/AddedToCartMessageComponent";
+import ProductForListComponent from "../../components/ProductForListComponent";
 
 import ImageZoom from "js-image-zoom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
-const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getProduct }) => {
+const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getProduct, getRelatedProducts }) => {
 
     const { id } = useParams()
     const [quantity, setQuantity] = useState(1);
@@ -33,6 +34,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
     const [productReviews, setProductReviews] = useState([]);
     const [productCount, setProductCount] = useState(0);
     const [productImages, setProductImages] = useState([]);
+    const [relatedProducts, setRelatedProducts] = useState([])
     const zoomOptions = {
         scale: 2,
         offset: { vertical: 0, horizontal: 0 },
@@ -52,15 +54,15 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                 setProductReviews(product.reviews.map((review) => review))
                 setProductCount(product.count)
                 setProductImages(product.images.map((image) => image))
-                console.log(product)
-                console.log(productImages)
-                console.log(productImages.map((image) => image.path))
             })
             .catch((er) =>
                 console.log(
                     er.response.data.message ? er.response.data.message : er.response.data
                 )
             );
+        getRelatedProducts(id)
+        .then(products => setRelatedProducts(products.slice(0, 4)))
+        .catch((er) => console.log(er));
     }, [id]);
     return (
         <Container>
@@ -149,6 +151,25 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                         </Button>
                     </Form>
                 </Col>
+            <Container className="g-4 mt-5 mb-5">
+                <h2>Related Products</h2>
+                <Row className="mt-3">
+                    {relatedProducts.map((product) => (
+                        <Col key={product._id} xs={12} sm={6} md={4} lg={3}>
+                            <ProductForListComponent
+                                key={product._id}
+                                images={product.images}
+                                name={product.name}
+                                description={product.description}
+                                price={product.price}
+                                rating={product.rating}
+                                reviewsNumber={product.reviewsNumber}
+                                productId={product._id}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
             </Row>
         </Container>
     );

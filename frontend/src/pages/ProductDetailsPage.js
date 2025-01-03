@@ -9,10 +9,14 @@ const ProductDetailsPage = () => {
     const { data } = await axios.get("/api/products/get-one/" + productId)
     return data
   }
+  const getRelatedProducts = async (productId) => {
+    // const { data } = await axios.get("/api/products/hotproducts");
+    const { data } = await axios.get("/api/products/get-one/related/" + productId);
+    console.log(data)
+    return data 
+  }
 
-
-
-  return <ProductDetailsPageComponent addToCartReduxAction={addToCart} reduxDispatch={dispatch} getProduct={getProduct} />
+  return <ProductDetailsPageComponent addToCartReduxAction={addToCart} reduxDispatch={dispatch} getProduct={getProduct} getRelatedProducts={getRelatedProducts} />
 };
 
 export default ProductDetailsPage;

@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const { getProducts,
     getProductById,
+    getHotProducts,
+    getNewProducts,
+    getRelatedProducts,
     getBestsellers,
     adminGetProducts,
     adminDeleteProduct,
@@ -17,6 +20,9 @@ router.get("/category/:categoryName/search/:searchQuery", getProducts)
 router.get("/category/:categoryName", getProducts)
 router.get("/", getProducts)
 router.get("/search/:searchQuery", getProducts)
+router.get("/hotproducts", getHotProducts)
+router.get("/new", getNewProducts)
+router.get("/get-one/related/:id", getRelatedProducts)
 router.get("/bestsellers", getBestsellers)
 router.get("/get-one/:id", getProductById)
 

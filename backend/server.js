@@ -29,21 +29,23 @@ app.use((error, req, res, next) => {
   if (process.env.NODE_ENV === "development") {
     console.error(error);
   }
-  next(error)
+  res.status(500).json({
+    message: "Something went wrong. Please try again later.", // Thông báo thân thiện
+  });
 })
 
-app.use((error, req, res, next) => {
-  if (process.env.NODE_ENV === "development") {
-    res.status(500).json({
-      message: error.message,
-      stack: error.stack
-    })
-  } else {
-    res.status(500).json({
-      message: error.message,
-    })
-  }
-})
+// app.use((error, req, res, next) => {
+//   if (process.env.NODE_ENV === "development") {
+//     res.status(500).json({
+//       message: error.message,
+//       stack: error.stack
+//     })
+//   } else {
+//     res.status(500).json({
+//       message: error.message,
+//     })
+//   }
+// })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
