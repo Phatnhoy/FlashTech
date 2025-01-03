@@ -1,0 +1,41 @@
+.btn-default {
+    color: #0d6efd !important;
+    font-weight: 500;
+    padding: 0;
+}
+.card-body {
+    padding: 16px 24px;
+}
+.card-title, .desc {
+    font-size: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.desc {
+    -webkit-line-clamp: 2;
+    font-size: 0.8rem;
+    height: 40px;
+}
+.prod-card {
+    font-size: 0.8rem;
+    border-radius: 10px;
+    overflow: hidden;
+    transform: transform 0.5s ease;
+}
+.prod-card:hover,
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2);
+}
+.category-card {
+    width: 650px;
+    border-radius: 30px;
+    overflow: hidden;
+    transform: transform 0.5s ease;
+}
+.home-row {
+    overflow-x: auto;
+}

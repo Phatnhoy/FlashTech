@@ -71,7 +71,16 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                 <Col style={{ zIndex: 1 }} md={4}>
                     {productImages.map((image, idx) => (
                         <div key={idx} id={`zoom-image-${idx}`} className="image-zoom-container">
-                            <Image fluid src={image.path} alt={`Product Image ${idx + 1}`} style={{ objectFit: "contain", marginBottom: "30px" }} /> <br />
+                            <Image 
+                                fluid 
+                                src={image.path} alt={`Product Image ${idx + 1}`} 
+                                style={{ 
+                                    border: '1px solid #ddd',
+                                    objectFit: "container", 
+                                    marginBottom: "30px",
+                                }} 
+                            /> 
+                            <br />
                         </div>
                     ))}
                 </Col>
@@ -153,9 +162,9 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                 </Col>
             <Container className="g-4 mt-5 mb-5">
                 <h2>Related Products</h2>
-                <Row className="mt-3">
+                <Row className="mt-3 home-card">
                     {relatedProducts.map((product) => (
-                        <Col key={product._id} xs={12} sm={6} md={4} lg={3}>
+                        <Col key={product._id} xs={12} sm={6} md={4} lg={3} style={{marginBottom: '10px'}}>
                             <ProductForListComponent
                                 key={product._id}
                                 images={product.images}

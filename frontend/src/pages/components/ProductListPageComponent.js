@@ -156,12 +156,14 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
                             </Col>
                         ))}
                     </Row>
-                    <Row><PaginationComponent
-                        categoryName={categoryName}
-                        searchQuery={searchQuery}
-                        paginationLinksNumber={paginationLinksNumber}
-                        pageNum={pageNum}
-                    /></Row>
+                    <Row style={{ paddingLeft: '12px', marginTop: '20px' }}>
+                        <PaginationComponent
+                            categoryName={categoryName}
+                            searchQuery={searchQuery}
+                            paginationLinksNumber={paginationLinksNumber}
+                            pageNum={pageNum}
+                        />
+                    </Row>
                 </Col>
             </Row>
         </Container>

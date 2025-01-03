@@ -32,7 +32,7 @@ const HomePageComponent = ({ getBestsellers, getProducts, getHotProducts, getNew
         <>
             <ProductCarouselComponent bestSellers={bestSellers} />
             <Container>
-                <Row xs={1} md={2} className="g-4 mt-5 mb-5">
+                <Row xs={1} md={2} className="g-4 mt-5 mb-5" style={{ columnGap: '20px' }}>
                     {categories.map((category, idx) => (
                         <CategoryCardComponent key={idx} category={category} idx={idx} />
                     ))}
@@ -40,9 +40,9 @@ const HomePageComponent = ({ getBestsellers, getProducts, getHotProducts, getNew
             </Container>
             <Container className="g-4 mt-5 mb-5">
                 <h2>New Products</h2>
-                <Row className="mt-3">
+                <Row className="mt-3 home-row">
                     {newProducts.map((product) => (
-                        <Col key={product._id} xs={12} sm={6} md={4} lg={3}>
+                        <Col key={product._id} xs={12} sm={6} md={4} lg={3} style={{marginBottom: '10px'}}>
                             <ProductForListComponent
                                 key={product._id}
                                 images={product.images}
